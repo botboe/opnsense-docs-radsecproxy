@@ -22,10 +22,26 @@ This example should provide a general overview of the radsecproxy-plugin for OPN
 About the radsecproxy-plugin
 ----------------------------
 
-Radsecproxy is a gui-less daemon which loads its configuration from the ``radsecproxy.conf`` file. To make it as easy as possible to transfer configuration-examples to this plugin, the plugins is orientated on the configfile's structure.
+Radsecproxy is a gui-less daemon which loads its configuration from the ``radsecproxy.conf`` file. To make it as easy as possible to transfer configuration-examples to this plugin, the plugins is orientated on the configfile's structure. Detailed information about the possible settings are provided in the official `manpage <https://radsecproxy.github.io/radsecproxy.conf.html>`_.
+
+Install the plugin via :menuselection:`System --> Firmware --> Plugins`, selecting **os-radsecproxy**. Once the plugin is installed, refresh the browser page and you will find the RadSecProxy configuration menu via :menuselection:`Services --> RadSecProxy`.
 
 #################
 Section 'General'
 #################
 
-Global settings a configured in this section.
+Global settings like loglevels, privacy-options, listening- and source-addresses are configured in this section. 
+
+$$$$$$$$$$$$$$$$$$
+Example p. 14 - 15
+$$$$$$$$$$$$$$$$$$
+
+- Go to :menuselection:`Services --> RadSecProxy --> General`
+- Configure the general settings as follows (if an option is not mentioned below, leave it as the default):
+
+    ===================== ===============================================================================================
+     **Enabled**           *Checked*
+     **Loglevel**          *1*
+     **Listen UDP**        *127.0.0.1:2084  or another socket to listen for unencrypted (plain radius) requests*
+     **Listen TLS**        *192.168.1.1:2083 or another socket to listen for encrypted (radsec) requests*
+    ===================== ===============================================================================================
