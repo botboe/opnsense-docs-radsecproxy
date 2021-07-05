@@ -27,7 +27,7 @@ Radsecproxy is a gui-less daemon which loads its configuration from the ``radsec
 Install the plugin via :menuselection:`System --> Firmware --> Plugins`, selecting **os-radsecproxy**. Once the plugin is installed, refresh the browser page and you will find the RadSecProxy configuration menu via :menuselection:`Services --> RadSecProxy`.
 
 #################
-Section 'General'
+Section *General*
 #################
 
 Global settings like loglevels, privacy-options, listening- and source-addresses are configured in this section. 
@@ -45,3 +45,27 @@ $$$$$$$$$$$$$$$$$$
      **Listen UDP**        *127.0.0.1:2084  or another socket to listen for unencrypted (plain radius) requests*
      **Listen TLS**        *192.168.1.1:2083 or another socket to listen for encrypted (radsec) requests*
     ===================== ===============================================================================================
+
+#################
+Section *TLS*
+#################
+
+All the other section are the so called *blocks*. Each block can contain one or more settings, whereas at least the blocks *Clients* and *Realms* must be provided. The TLS-block provides the configuration for the encrypted communication.
+
+$$$$$$$$$$$$$$$$$$
+Example p. 15
+$$$$$$$$$$$$$$$$$$
+
+- Go to :menuselection:`Services --> RadSecProxy --> TLS`
+- Click **+** to add a new TLS-configuration
+- Configure the settings as follows (if an option is not mentioned below, leave it as the default):
+
+    =============================== ====================================================================================================
+     **Unique name**                 *Provide a unique name to identify this configuration. If it is named 'default', it will be used if other blocks don't specify an explicit TLS-config*
+     **Description**                 *Describe your config-block like 'My Company's TLS-settings'*
+     **CA-certificate**              *Select a previously imported CA-certificate, which radsecproxy uses to verify the peers certificate*
+     **This server's certificate**   *Select a previously imported certificate, which this proxy will use. The file may also contain a certificate chain.*
+    =============================== ====================================================================================================
+
+.. Note::
+    The proxy-certificates and CA-certificates must be imported before configuring this TLS-block via :menuselection:`System --> Trust --> Certificates` and :menuselection:`System --> Trust --> Authorities`.
