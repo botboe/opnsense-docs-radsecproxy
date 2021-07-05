@@ -64,8 +64,63 @@ $$$$$$$$$$$$$$$$$$
      **Unique name**                 *Provide a unique name to identify this configuration. If it is named 'default', it will be used if other blocks don't specify an explicit TLS-config*
      **Description**                 *Describe your config-block like 'My Company's TLS-settings'*
      **CA-certificate**              *Select a previously imported CA-certificate, which radsecproxy uses to verify the peers certificate*
-     **This server's certificate**   *Select a previously imported certificate, which this proxy will use. The file may also contain a certificate chain.*
+     **This server's certificate**   *Select a previously imported certificate, which this proxy will use. The file may also contain a certificate chain*
     =============================== ====================================================================================================
+
+.. Note::
+    The proxy-certificates and CA-certificates must be imported before configuring this TLS-block via :menuselection:`System --> Trust --> Certificates` and :menuselection:`System --> Trust --> Authorities`.
+    
+#################
+Section *Clients*
+#################
+
+Clients are peers which connect encrypted (radsec) or unencrypted (plain radius) to this proxy. 
+
+$$$$$$$$$$$$$$$$$$
+Example p. 16
+$$$$$$$$$$$$$$$$$$
+
+- Go to :menuselection:`Services --> RadSecProxy --> Clients`
+- Click **+** to add a new client-configuration
+- Configure the settings as follows (if an option is not mentioned below, leave it as the default):
+
+    =============================== ====================================================================================================
+     **Enable Client**               *Checked*
+     **Unique identifier**           *Provide a unique name to identify this configuration like 'local_radius'*
+     **Description**                 *Describe your config-block like 'My local radius-server'*
+     **IP / Net**                    *127.0.0.1 as the address which is allowed to connect*
+     **Type**                        *UDP (plain unencrypted radius via UDP)*
+     **Secret**                      *strenggeheim*
+    =============================== ====================================================================================================
+- **Save** the client-configuration, and then add the next client
+
+- Click **+** to add a new client-configuration
+- Configure the settings as follows (if an option is not mentioned below, leave it as the default):
+
+    =============================== ====================================================================================================
+     **Enable Client**               *Checked*
+     **Unique identifier**           *Provide a unique name to identify this configuration like 'dfn_radius_1'*
+     **Description**                 *Describe your config-block like 'Primary DFN-Radius-Server'*
+     **IP / Net**                    *radius1.dfn.de as the address which is allowed to connect*
+     **Type**                        *TLS (encrypted radius via RadSec)*
+     **Advanced Mode**               *config-block opened*
+     **TLS-config**                  *default - or the name of the previously created TLS-config*
+    =============================== ====================================================================================================
+- **Save** the client-configuration, and then add the next client
+
+- Click **+** to add a new client-configuration
+- Configure the settings as follows (if an option is not mentioned below, leave it as the default):
+
+    =============================== ====================================================================================================
+     **Enable Client**               *Checked*
+     **Unique identifier**           *Provide a unique name to identify this configuration like 'dfn_radius_2'*
+     **Description**                 *Describe your config-block like 'Secondary DFN-Radius-Server'*
+     **IP / Net**                    *radius2.dfn.de as the address which is allowed to connect*
+     **Type**                        *TLS (encrypted radius via RadSec)*
+     **Advanced Mode**               *config-block opened*
+     **TLS-config**                  *default - or the name of the previously created TLS-config*
+    =============================== ====================================================================================================
+- **Save** the client-configuration
 
 .. Note::
     The proxy-certificates and CA-certificates must be imported before configuring this TLS-block via :menuselection:`System --> Trust --> Certificates` and :menuselection:`System --> Trust --> Authorities`.
